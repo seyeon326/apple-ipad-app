@@ -68,10 +68,13 @@ header .basket {
   position: absolute;
   top: calc(100% + 4px);
   right: -6px;
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: .4s;
 }
 header .basket.show {
-  display: block;
+  visibility: visible;
+  opacity: 1;
 }
 header .basket .arrow {
   width: 20px;
