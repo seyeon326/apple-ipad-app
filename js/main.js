@@ -67,3 +67,21 @@ function hideSearch() {
   searchDelayEls.reverse();
   searchInputEl.value = '';
 }
+
+
+// sprite-icons animation 속성 값 쉽게 생성
+let x = 0;
+let y = 0;
+let frames = '';
+
+for (let i = 0; i < 60; i += 1) {
+  frames += `${(100 / 60 * i).toFixed(2)}% { background-position: ${x}${x === 0 ? '' : 'px'} ${y}${y === 0 ? '' : 'px'}; }\n`;
+  if (x <= -500) {
+    x = 0;
+    y -= 100;
+    continue;
+  }
+  x -= 100;
+}
+
+console.log(frames);
