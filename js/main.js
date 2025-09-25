@@ -41,7 +41,10 @@ const searchInputEl = searchWrapEl.querySelector('input');
 const searchDelayEls = [...searchWrapEl.querySelectorAll('li')];
 
 searchStarterEl.addEventListener('click', showSearch);
-searchCloserEl.addEventListener('click', hideSearch);
+searchCloserEl.addEventListener('click', function (event) {
+  event.stopPropagation()
+  hideSearch()
+});
 searchShadowEl.addEventListener('click', hideSearch);
 
 function showSearch() {
@@ -78,15 +81,37 @@ function stopScroll() {
 }
 
 
-// 헤더 메뉴 토글
+// 헤더 메뉴 토글(모바일)
 const menuStarterEl = document.querySelector('header .menu-starter')
 menuStarterEl.addEventListener('click', function () {
   if (headerEl.classList.contains('menuing')) {
     headerEl.classList.remove('menuing')
+    searchInputEl.value = '';
     playScroll()
   } else {
     headerEl.classList.add('menuing')
     stopScroll()
+  }
+})
+
+
+// 헤더 검색(모바일)
+const searchTextFieldEl = document.querySelector('header .textfield')
+const searchCancleEl = document.querySelector('header .search-canceler')
+searchTextFieldEl.addEventListener('click', function () {
+  headerEl.classList.add('searching--mobile')
+  searchInputEl.focus()
+})
+searchCancleEl.addEventListener('click', function () {
+  headerEl.classList.remove('searching--mobile')
+})
+
+
+window.addEventListener('resize', function () {
+  if (window.innerWidth <= 740) {
+    headerEl.classList.remove('searching')
+  } else {
+    headerEl.classList.remove('searching--mobile')
   }
 })
 
